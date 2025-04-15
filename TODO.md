@@ -1,0 +1,1 @@
+- [x] Task 1: Set up project structure
