@@ -3,7 +3,7 @@
 ## Project Setup
 - [x] Task 1: Set up project structure (feature/project-setup)
 - [x] Task 2: Install dependencies (feature/install-dependencies)
-- [ ] Task 3: Configure Supabase (feature/supabase-setup)
+- [x] Task 3: Configure Supabase (feature/supabase-setup)
 
 ## Scraper Module
 - [ ] Task 4: Implement basic scraper (feature/scraper-module)
