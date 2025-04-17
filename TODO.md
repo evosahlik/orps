@@ -6,7 +6,7 @@
 - [x] Task 3: Configure Supabase (feature/supabase-setup)
 
 ## Scraper Module
-- [ ] Task 4: Implement basic scraper (feature/scraper-module)
+- [x] Task 4: Implement basic scraper (feature/scraper-module)
 - [ ] Task 5: Add retailer configuration (feature/retailer-config)
 - [ ] Task 6: Store scraped data in Supabase (feature/scraper-supabase)
 
