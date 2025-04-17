@@ -12,8 +12,22 @@ class SupabaseClient:
             raise ValueError("SUPABASE_URL and SUPABASE_KEY must be set in .env")
         self.client: Client = create_client(url, key)
 
+    def insert_retailer(self, name: str, url: str):
+        data = {"name": name, "url": url}
+        return self.client.table("retailers").insert(data).execute()
+
+    def insert_product(self, retailer_id: int, name: str, price: float, sku: str = None, category: str = None):
+        product = {"retailer_id": retailer_id, "name": name, "sku": sku, "category": category}
+        product_res = self.client.table("products").insert(product).execute()
+        product_id = product_res.data[0]["id"]
+        price_entry = {"product_id": product_id, "price": price}
+        self.client.table("price_history").insert(price_entry).execute()
+        return product_res
+
+    def get_products(self):
+        return self.client.table("products").select("*").execute().data
+
     def test_connection(self):
-        """Test connectivity by querying the retailers table."""
         try:
             response = self.client.table("retailers").select("*").execute()
             return response.data
@@ -21,14 +35,6 @@ class SupabaseClient:
             raise Exception(f"Connection failed: {str(e)}")
 
 if __name__ == "__main__":
-    try:
-        supabase = SupabaseClient()
-        # Insert test retailer
-        supabase.client.table("retailers").insert(
-            {"name": "Test Retailer", "url": "https://example.com"}
-        ).execute()
-        # Test connection
-        retailers = supabase.test_connection()
-        print("Connection successful! Retailers:", retailers)
-    except Exception as e:
-        print("Error:", str(e))
+    supabase = SupabaseClient()
+    retailers = supabase.test_connection()
+    print("Connection successful:", retailers)
